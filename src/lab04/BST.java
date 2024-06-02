@@ -16,14 +16,32 @@ public class BST {
 		this.root = null;
 	}
 
+	/*
+	 * Post: Returns true if the binary search tree contains no nodes , false otherwise.
+	 */
 	public boolean isEmpty() {
 		return root == null;
 	}
 
+	/*
+	 * Pre:
+	 * dollar - Dollar object that will be inserted.
+	 * 
+	 * Post: 
+	 * Inserts the given Dollar object into the binary search tree in its appropriate position.
+	 */
 	public void insert(Dollar dollar) {
 		root = insertHelper(root, dollar);
 	}
 
+	/*
+	 * Pre:
+	 * node - BSTNode reference in the BST.
+	 * dollar - Dollar object that will be inserted.
+	 * 
+	 * Post: 
+	 * Returns reference to the root node of the modified binary search tree after inserting the given Dollar object.
+	 */
 	private BSTNode insertHelper(BSTNode node, Dollar dollar) {
 		if (node == null) {
 			return new BSTNode(dollar);
@@ -38,10 +56,26 @@ public class BST {
 		return node;
 	}
 
+	/*
+	 * Pre: 
+	 * dollar - Dollar object that will be searched in the BST.
+	 * 
+	 * Post: 
+	 * Returns true if the given Dollar object is found in the binary search tree, false otherwise.
+	 */
 	public boolean search(Dollar dollar) {
 		return searchHelper(root, dollar);
 	}
 
+	/*
+	 * Pre:
+	 * node - BSTNode reference in the BST.
+	 * dollar - Dollar object that will be searched.
+	 * 
+	 * Post:
+	 * Returns true if the given Dollar object is found in the binary search tree rooted 
+	 * at the specified node, false otherwise.
+	 */
 	private boolean searchHelper(BSTNode node, Dollar dollar) {
 
 		if (node == null) {
@@ -60,10 +94,26 @@ public class BST {
 
 	}
 
+	/*
+	 * Pre:
+	 * dollar - Dollar object that will be searched and deleted.
+	 * 
+	 * Post: 
+	 * Deletes the given Dollar object from the binary search tree if it exists.
+	 */
 	public void delete(Dollar dollar) {
 		root = deleteHelper(root, dollar);
 	}
 
+	/*
+	 * Pre:
+	 * node - BSTNode reference in the BST.
+	 * dollar - Dollar object that will be deleted. 
+	 * 
+	 * Post:
+	 * Returns a reference to the root node of the modified binary search tree after 
+	 * deleting the node containing the given Dollar object.
+	 */
 	private BSTNode deleteHelper(BSTNode node, Dollar dollar) {
 		if (node == null) {
 			return node;
@@ -86,6 +136,13 @@ public class BST {
 		return node;
 	}
 
+	/*
+	 * Pre:
+	 * node - A reference to a node in the binary search tree that is being compared to.
+	 * 
+	 * Post:
+	 * Returns the node with the minimum value in the binary search tree rooted at the specified node.
+	 */
 	private BSTNode inOrderSuccessorMin(BSTNode node) {
 		while (node.getLeft() != null) {
 			node = node.getLeft();
@@ -93,6 +150,13 @@ public class BST {
 		return node;
 	}
 	
+	/*
+	 * Pre:
+	 * title - String of specified traversal type.
+	 * 
+	 * Post:
+	 * Prints a header for the specified traversal type in console and output file.
+	 */
 	private void printTitle(String title) {
 		System.out.println("\n" + title + ": ");
 		if (this.ps != null) {
@@ -100,6 +164,13 @@ public class BST {
 		}
 	}
 	
+	/*
+	 * Pre:
+	 * node - BSTNode that will be printed.
+	 * 
+	 * Post:
+	 * Prints data of given node in console and output file.
+	 */
 	private void printNode(BSTNode node) {
 		System.out.println(node.getDollar() + " ");
 		if (this.ps != null) {
@@ -107,6 +178,13 @@ public class BST {
 		}
 	}
 
+	/*
+	 * Pre:
+	 * ps - File-based PrintStream object for the output file.
+	 * 
+	 * Post:
+	 * Prints the in-order traversal of the binary search tree.
+	 */
 	public void inOrderTraversal(PrintStream ps) {
 		this.ps = ps;
 		printTitle("In-order traversal");
@@ -114,6 +192,13 @@ public class BST {
 		this.ps = null;
 	}
 
+	/*
+	 * Pre:
+	 * node - A reference to a node in the binary search tree or null.
+	 * 
+	 * Post:
+	 * Prints the in-order traversal of the binary search tree rooted at the specified node.
+	 */
 	private void inOrderTraversalHelper(BSTNode node) {
 		if (node != null) {
 			inOrderTraversalHelper(node.getLeft());
@@ -122,6 +207,13 @@ public class BST {
 		}
 	}
 
+	/*
+	 * Pre:
+	 * ps - File-based PrintStream object for the output file.
+	 * 
+	 * Post:
+	 * Prints the pre-order traversal of the binary search tree.
+	 */
 	public void preOrderTraversal(PrintStream ps) {
 		this.ps = ps;
 		printTitle("Pre-order traversal");
@@ -129,6 +221,13 @@ public class BST {
 		this.ps = null;
 	}
 
+	/*
+	 * Pre:
+	 * node - A reference to a node in the binary search tree or null.
+	 * 
+	 * Post:
+	 * Prints the pre-order traversal of the binary search tree rooted at the specified node.
+	 */
 	private void preOrderTraversalHelper(BSTNode node) {
 		if (node != null) {
 			printNode(node);
@@ -137,6 +236,13 @@ public class BST {
 		}
 	}
 
+	/*
+	 * Pre:
+	 * ps - File-based PrintStream object for the output file.
+	 * 
+	 * Post:
+	 * Prints the post-order traversal of the binary search tree.
+	 */
 	public void postOrderTraversal(PrintStream ps) {
 		this.ps = ps;
 		printTitle("Post-order traversal");
@@ -144,6 +250,13 @@ public class BST {
 		this.ps = null;
 	}
 
+	/*
+	 * Pre:
+	 * node - A reference to a node in the binary search tree or null.
+	 * 
+	 * Post:
+	 * Prints the post-order traversal of the binary search tree rooted at the specified node.
+	 */
 	private void postOrderTraversalHelper(BSTNode node) {
 		if (node != null) {
 			postOrderTraversalHelper(node.getLeft());
@@ -152,6 +265,13 @@ public class BST {
 		}
 	}
 
+	/*
+	 * Pre:
+	 * ps - File-based PrintStream object for the output file.
+	 * 
+	 * Post:
+	 * Prints the breadth-first traversal of the binary search tree.
+	 */
 	public void breadthFirstTraversal(PrintStream ps) {
 		this.ps = ps;
 		printTitle("Breadth-first traversal");
@@ -163,6 +283,10 @@ public class BST {
 		this.ps = null;
 	}
 	
+	/*
+	 * Post:
+	 * Returns the height of the specified node.
+	 */
 	private int getHeight(BSTNode node) {
 		if (node == null)
 			return 0;
@@ -177,6 +301,14 @@ public class BST {
 		}
 	}
 
+	/*
+	 * Pre:
+	 * node - A reference to a node in the binary search tree or null.
+	 * level - Positive integer indicating the level in the binary search tree.
+	 * 
+	 * Post:
+	 * Prints the nodes at the specified level in the binary search tree rooted at the specified node.
+	 */
 	private void breadthFirstTraversalHelper(BSTNode node, int level) {
 		if (node == null)
 			return;
@@ -188,10 +320,18 @@ public class BST {
 		}
 	}
 
+	/*
+	 * Post:
+	 * Returns the number of nodes in the binary search tree.
+	 */
 	public int count() {
 		return countHelper(root);
 	}
 
+	/*
+	 * Post:
+	 * Returns the number of nodes in the binary search tree rooted at the specified node.
+	 */
 	private int countHelper(BSTNode node) {
 		if (node == null) {
 			return 0;
