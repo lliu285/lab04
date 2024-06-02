@@ -43,6 +43,17 @@ public class BST {
 	 * Returns reference to the root node of the modified binary search tree after inserting the given Dollar object.
 	 */
 	private BSTNode insertHelper(BSTNode node, Dollar dollar) {
+		/*
+		Pseudocode:
+		If the node is null:
+        	Return a new BSTNode with the dollar
+        If the dollar value < node dollar value:
+        	Call insertHelper(node's left child,dollar) to set the node's left child
+        If the dollar value > node dollar value:
+            Call insertHelper(node's right child,dollar) to set the node's right child
+        Return the node
+		 */
+		
 		if (node == null) {
 			return new BSTNode(dollar);
 		}
@@ -77,7 +88,18 @@ public class BST {
 	 * at the specified node, false otherwise.
 	 */
 	private boolean searchHelper(BSTNode node, Dollar dollar) {
-
+		/*
+		Pseudocode:
+		If the node is null:
+        	Return false (dollar not found)
+        If the node dollar value == dollar value:
+        	Return true (dollar is found)
+        If the dollar value < node dollar value:
+        	Return searchHelper(node's left child,dollar) to search the left subtree 
+        otherwise:
+        	Return searchHelper(node's right child, dollar) to search the right subtree
+		 */
+		
 		if (node == null) {
 			return false;
 		}
@@ -115,6 +137,25 @@ public class BST {
 	 * deleting the node containing the given Dollar object.
 	 */
 	private BSTNode deleteHelper(BSTNode node, Dollar dollar) {
+		/*
+		Pseudocode:
+		If the node is null:
+        	Return the node
+        If the dollar value < node dollar value:
+        	Call deleteHelper(node's left child,dollar) to set the node's left child
+        If the dollar value > node dollar value:
+        	Call deleteHelper(node's right child,dollar) to set the node's right child
+
+        Otherwise:
+        	If the node's left child is null:
+                Return the node's right child
+            If the node's right child is null:
+            	Return the node's left child
+                Set node's dollar to inOrderSuccessorMin node's dollar in the right subtree 
+                Call deleteHelper(node's right child, node dollar) to set the node's right child
+            Return node
+		 */
+		
 		if (node == null) {
 			return node;
 		}
@@ -144,6 +185,13 @@ public class BST {
 	 * Returns the node with the minimum value in the binary search tree rooted at the specified node.
 	 */
 	private BSTNode inOrderSuccessorMin(BSTNode node) {
+		/*
+		Pseudocode:
+		While the node's left child is not null:
+        	Move the node to node's left
+        Return the node
+		 */
+		
 		while (node.getLeft() != null) {
 			node = node.getLeft();
 		}
@@ -200,6 +248,14 @@ public class BST {
 	 * Prints the in-order traversal of the binary search tree rooted at the specified node.
 	 */
 	private void inOrderTraversalHelper(BSTNode node) {
+		/*
+		Pseudocode:
+		If the node is not null:
+        	Call inOrderTraversalHelper(node's left child)
+            printNode the node
+            Call inOrderTraversalHelper(node's right child)
+		 */
+		
 		if (node != null) {
 			inOrderTraversalHelper(node.getLeft());
 			printNode(node);
@@ -229,6 +285,14 @@ public class BST {
 	 * Prints the pre-order traversal of the binary search tree rooted at the specified node.
 	 */
 	private void preOrderTraversalHelper(BSTNode node) {
+		/*
+		Pseudocode:
+		If the node is not null:
+        	printNode the node
+            Call preOrderTraversalHelper(node's left child)
+            Call preOrderTraversalHelper(node's right child)
+		 */
+		
 		if (node != null) {
 			printNode(node);
 			preOrderTraversalHelper(node.getLeft());
@@ -258,6 +322,14 @@ public class BST {
 	 * Prints the post-order traversal of the binary search tree rooted at the specified node.
 	 */
 	private void postOrderTraversalHelper(BSTNode node) {
+		/*
+		Pseudocode:
+		If the node is not null:
+        	Call postOrderTraversalHelper(node's left child)
+            Call postOrderTraversalHelper(node's right child)
+			printNode the node
+		 */
+		
 		if (node != null) {
 			postOrderTraversalHelper(node.getLeft());
 			postOrderTraversalHelper(node.getRight());
@@ -273,6 +345,16 @@ public class BST {
 	 * Prints the breadth-first traversal of the binary search tree.
 	 */
 	public void breadthFirstTraversal(PrintStream ps) {
+		/*
+		Pseudocode:
+		Set this.ps(instance variable) to ps
+        PrintTitle "Breadth-first traversal"
+        Call getHeight(root) to set the height of the tree
+        From level 1 to i(the height of the tree):
+            Call breadthFirstTraversalHelper(root,i)
+        Set this.ps to null
+		 */
+		
 		this.ps = ps;
 		printTitle("Breadth-first traversal");
 		int height = getHeight(root);
@@ -288,6 +370,18 @@ public class BST {
 	 * Returns the height of the specified node.
 	 */
 	private int getHeight(BSTNode node) {
+		/*
+		Pseudocode:
+		If the node is null:
+			Return 0
+		Call getHeight(node's left child) to set the height of the left subtree
+        Call getHeight(node's right child) to set the height of the right subtree
+		if left subtree's height > right subtree's height: 
+            return left subtree's height + 1 
+		otherwise:
+			return right subtree's height + 1
+		 */
+		
 		if (node == null)
 			return 0;
 		else {
@@ -310,6 +404,17 @@ public class BST {
 	 * Prints the nodes at the specified level in the binary search tree rooted at the specified node.
 	 */
 	private void breadthFirstTraversalHelper(BSTNode node, int level) {
+		/*
+		Pseudocode:
+		If the node is null:
+        	Return; (exit out of method)
+		If the level == 1:
+			printNode the node
+		If the level > 1:
+			Call breadthFirstTraversalHelper(node's left child,level - 1)
+			Call breadthFirstTraversalHelper(node's right child,level - 1)
+		 */
+		
 		if (node == null)
 			return;
 		if (level == 1)
@@ -328,6 +433,21 @@ public class BST {
 	 * Prints the breadth-first traversal of the binary search tree using Queue.
 	 */
 	public void breadthFirstTraversalWithQueue(PrintStream ps) {
+		/*
+		Pseudocode:
+		Print title.
+		Create queue to hold the nodes of the tree.
+
+		Put the root node of the tree into the queue.
+
+		While there are still nodes in the queue:
+    		Remove first node from the queue.
+    		Print the value of that node.
+
+    		If the node has a left child, put it in the queue.
+    		If the node has a right child, put it in the queue.
+		*/
+		
 		this.ps = ps;
 		printTitle("Breadth-first traversal with Queue");
 		
@@ -361,6 +481,12 @@ public class BST {
 	 * Returns the number of nodes in the binary search tree rooted at the specified node.
 	 */
 	private int countHelper(BSTNode node) {
+		/*
+		Pseudocode:
+		If the node is null:
+        	Return 0
+        Return 1 + countHelper(node's left child) + countHelper(node's right child)
+		 */
 		if (node == null) {
 			return 0;
 		}

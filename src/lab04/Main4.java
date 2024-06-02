@@ -35,21 +35,10 @@ public class Main4 {
         dollars[17] = new Dollar(1, 00);
         dollars[18] = new Dollar(251, 00);
         dollars[19] = new Dollar(151, 00);
-        
-    	/*
-    	Dollar[] dollars = new Dollar[6];
-        dollars[0] = new Dollar(4, 00);
-        dollars[1] = new Dollar(2, 00);
-        dollars[2] = new Dollar(5, 00);
-        dollars[3] = new Dollar(1, 00);
-        dollars[4] = new Dollar(3, 00);
-        dollars[5] = new Dollar(6, 00);
-        */
 
         for (int i = 0; i < dollars.length; i++) {
         	bst.insert(dollars[i]);
         }
-        
         printOutput(bst);
         
         Scanner sc = new Scanner(System.in);
