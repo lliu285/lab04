@@ -21,26 +21,50 @@ public class Dollar {
 		this.fractionalValue = fractionalValue;
 	}
 
+	/*
+	 * Post: Returns the int whole value of the Dollar currency.
+	 */
 	public int getWholeValue() {
 		return wholeValue;
 	}
 
+	/*
+	 * Post: Returns the int fractional value of the Dollar currency.
+	 */
 	public int getFractionalValue() {
 		return fractionalValue;
 	}
 
+	/*
+	 * Pre: 
+	 * wholeValue - int value of new whole part
+	 * 
+	 * Post: Sets whole value to the given new int whole value
+	 */
 	public void setWholeValue(int wholeValue) {
 		this.wholeValue = wholeValue;
 	}
 
+	/*
+	 * Pre: 
+	 * fractionalValue - int value of new fractional part
+	 * 
+	 * Post: Sets fractional value to the given new int fractional value
+	 */
 	public void setFractionalValue(int fractionalValue) {
 		this.fractionalValue = fractionalValue;
 	}
 
+	/*
+	 * Post: Returns double value of Dollar object.
+	 */
 	public double getValue() {
 		return wholeValue + (fractionalValue / 100.0);
 	}
 
+	/*
+	 * Post: Returns a String for the Dollar object formatted as "$xx.xx"
+	 */
 	@Override
 	public String toString() {
 		return "$" + wholeValue + "." + String.format("%02d", fractionalValue);
