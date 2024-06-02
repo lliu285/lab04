@@ -93,7 +93,7 @@ public class Main4 {
     		Dollar d = new Dollar(w, f);
     		bst.insert(d);
     	} catch(Exception e) {
-    		System.out.println(e.getMessage());
+    		System.out.println(e);
     	}
     }
     
@@ -111,7 +111,7 @@ public class Main4 {
     			System.out.println("The value, $" + w + "." + f + ", was not found.");
     		}
     	} catch(Exception e) {
-    		System.out.println(e.getMessage());
+    		System.out.println(e);
     	}
     }
     
@@ -125,7 +125,7 @@ public class Main4 {
     		Dollar d = new Dollar(w, f);
     		bst.delete(d);
     	} catch(Exception e) {
-    		System.out.println(e.getMessage());
+    		System.out.println(e);
     	}
     }
     

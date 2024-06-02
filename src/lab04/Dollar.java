@@ -5,6 +5,12 @@ public class Dollar {
 	private int fractionalValue;
 
 	public Dollar(int wholeValue, int fractionalValue) {
+		if (wholeValue < 0 || fractionalValue < 0) {
+            throw new IllegalArgumentException("Negative whole or fractional value");
+        } else if (fractionalValue > 99) {
+        	throw new IllegalArgumentException("Fractional value out of range");
+        }
+		
 		this.wholeValue = wholeValue;
 		this.fractionalValue = fractionalValue;
 	}

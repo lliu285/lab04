@@ -55,7 +55,7 @@ public class BST {
 	}
 
 	public void delete(Dollar dollar) {
-		root = delete_helper(root, dollar);
+		root = deleteHelper(root, dollar);
 	}
 
 	private BSTNode deleteHelper(BSTNode node, Dollar dollar) {
