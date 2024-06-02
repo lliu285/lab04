@@ -3,9 +3,11 @@ import java.util.Scanner;
 import java.io.*;
 
 /*
- * 
+ * Lab 4
+ * Names: Lucia Liu, Nithya Ramasubramonian
+ * Due date: 6/1/24
+ * Purpose: The purpose of this lab is to practice implementing Binary Search Trees through a Dollar modeling scenario.
  */
-
 public class Main4 {
 
     public static void main(String[] args) {

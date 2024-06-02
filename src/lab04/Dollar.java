@@ -1,15 +1,21 @@
 package lab04;
 
+/*
+ * Lab 4
+ * Names: Lucia Liu, Nithya Ramasubramonian
+ * Due date: 6/1/24
+ * Purpose: The purpose of this lab is to practice implementing Binary Search Trees through a Dollar modeling scenario.
+ */
 public class Dollar {
 	private int wholeValue;
 	private int fractionalValue;
 
 	public Dollar(int wholeValue, int fractionalValue) {
 		if (wholeValue < 0 || fractionalValue < 0) {
-            throw new IllegalArgumentException("Negative whole or fractional value");
-        } else if (fractionalValue > 99) {
+			throw new IllegalArgumentException("Negative whole or fractional value");
+		} else if (fractionalValue > 99) {
         	throw new IllegalArgumentException("Fractional value out of range");
-        }
+		}
 		
 		this.wholeValue = wholeValue;
 		this.fractionalValue = fractionalValue;
@@ -39,6 +45,4 @@ public class Dollar {
 	public String toString() {
 		return "$" + wholeValue + "." + String.format("%02d", fractionalValue);
 	}
-
-	// might need to create more functions here ...
 }
