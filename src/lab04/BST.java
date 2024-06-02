@@ -158,9 +158,9 @@ public class BST {
 	 * Prints a header for the specified traversal type in console and output file.
 	 */
 	private void printTitle(String title) {
-		System.out.println("\n" + title + ": ");
+		System.out.println("\n\n" + title + ": ");
 		if (this.ps != null) {
-			ps.println("\n" + title + ": ");
+			ps.println("\n\n" + title + ": ");
 		}
 	}
 	
@@ -172,7 +172,7 @@ public class BST {
 	 * Prints data of given node in console and output file.
 	 */
 	private void printNode(BSTNode node) {
-		System.out.println(node.getDollar() + " ");
+		System.out.print(node.getDollar() + " ");
 		if (this.ps != null) {
 			ps.println(node.getDollar() + " ");
 		}
@@ -317,6 +317,34 @@ public class BST {
 		else if (level > 1) {
 			breadthFirstTraversalHelper(node.getLeft(), level - 1);
 			breadthFirstTraversalHelper(node.getRight(), level - 1);
+		}
+	}
+	
+	/*
+	 * Pre:
+	 * ps - File-based PrintStream object for the output file.
+	 * 
+	 * Post:
+	 * Prints the breadth-first traversal of the binary search tree using Queue.
+	 */
+	public void breadthFirstTraversalWithQueue(PrintStream ps) {
+		this.ps = ps;
+		printTitle("Breadth-first traversal with Queue");
+		
+		Queue<BSTNode> q = new Queue<BSTNode>();
+		q.enqueue(root);
+		
+		while(!q.isEmpty()) {
+			BSTNode node = q.dequeue();
+			printNode(node);
+			
+			if (node.getLeft() != null) {
+				q.enqueue(node.getLeft());
+			} 
+			
+			if (node.getRight() != null) {
+				q.enqueue(node.getRight());
+			} 
 		}
 	}
 

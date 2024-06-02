@@ -10,6 +10,15 @@ public class Dollar {
 	private int wholeValue;
 	private int fractionalValue;
 
+	/*
+	 * Pre:
+	 * wholeValue - int whole part of Dollar, cannot be negative
+	 * fractionalValue - int whole part of Dollar, cannot be negative or be greater than 99
+	 * 
+	 * Post:
+	 * Throw exception if wholeValue or fractionalValue is negative 
+	 * or if fractionalValue is greater than 99
+	 */
 	public Dollar(int wholeValue, int fractionalValue) {
 		if (wholeValue < 0 || fractionalValue < 0) {
 			throw new IllegalArgumentException("Negative whole or fractional value");
