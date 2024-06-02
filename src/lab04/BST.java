@@ -4,16 +4,10 @@ import java.io.*;
 public class BST {
 
 	private BSTNode root;
-	//private PrintStream ps;
+	private PrintStream ps;
 
 	public BST() {
 		this.root = null;
-		
-//		try {
-//			ps = new PrintStream("output.txt");
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
 	}
 
 	public boolean isEmpty() {
@@ -21,28 +15,28 @@ public class BST {
 	}
 
 	public void insert(Dollar dollar) {
-		root = insert_helper(root, dollar);
+		root = insertHelper(root, dollar);
 	}
 
-	private BSTNode insert_helper(BSTNode node, Dollar dollar) {
+	private BSTNode insertHelper(BSTNode node, Dollar dollar) {
 		if (node == null) {
 			return new BSTNode(dollar);
 		}
 
 		if (dollar.getValue() < node.getDollar().getValue()) { // checking the left
-			node.setLeft(insert_helper(node.getLeft(), dollar));
+			node.setLeft(insertHelper(node.getLeft(), dollar));
 		} else if (dollar.getValue() > node.getDollar().getValue()) { // checking the right
-			node.setRight(insert_helper(node.getRight(), dollar));
+			node.setRight(insertHelper(node.getRight(), dollar));
 		}
 
 		return node;
 	}
 
 	public boolean search(Dollar dollar) {
-		return search_helper(root, dollar);
+		return searchHelper(root, dollar);
 	}
 
-	private boolean search_helper(BSTNode node, Dollar dollar) {
+	private boolean searchHelper(BSTNode node, Dollar dollar) {
 
 		if (node == null) {
 			return false;
@@ -53,9 +47,9 @@ public class BST {
 		}
 
 		if (dollar.getValue() < node.getDollar().getValue()) {
-			return search_helper(node.getLeft(), dollar);
+			return searchHelper(node.getLeft(), dollar);
 		} else {
-			return search_helper(node.getRight(), dollar);
+			return searchHelper(node.getRight(), dollar);
 		}
 
 	}
@@ -64,15 +58,15 @@ public class BST {
 		root = delete_helper(root, dollar);
 	}
 
-	private BSTNode delete_helper(BSTNode node, Dollar dollar) {
+	private BSTNode deleteHelper(BSTNode node, Dollar dollar) {
 		if (node == null) {
 			return node;
 		}
 
 		if (dollar.getValue() < node.getDollar().getValue()) {
-			node.setLeft(delete_helper(node.getLeft(), dollar));
+			node.setLeft(deleteHelper(node.getLeft(), dollar));
 		} else if (dollar.getValue() > node.getDollar().getValue()) {
-			node.setRight(delete_helper(node.getRight(), dollar));
+			node.setRight(deleteHelper(node.getRight(), dollar));
 		} else {
 			if (node.getLeft() == null) {
 				return node.getRight();
@@ -80,90 +74,112 @@ public class BST {
 				return node.getLeft();
 			}
 
-			node.setDollar(in_order_successor_min(node.getRight()).getDollar());
-			node.setRight(delete_helper(node.getRight(), node.getDollar()));
+			node.setDollar(inOrderSuccessorMin(node.getRight()).getDollar());
+			node.setRight(deleteHelper(node.getRight(), node.getDollar()));
 		}
 		return node;
 	}
 
-	private BSTNode in_order_successor_min(BSTNode node) {
+	private BSTNode inOrderSuccessorMin(BSTNode node) {
 		while (node.getLeft() != null) {
 			node = node.getLeft();
 		}
 		return node;
 	}
+	
+	private void printTitle(String title) {
+		System.out.println("\n" + title + ": ");
+		if (this.ps != null) {
+			ps.println("\n" + title + ": ");
+		}
+	}
+	
+	private void printNode(BSTNode node) {
+		System.out.println(node.getDollar() + " ");
+		if (this.ps != null) {
+			ps.println(node.getDollar() + " ");
+		}
+	}
 
-	public void inOrderTraversal() {
-		System.out.println("\nIn-order traversal: ");
+	public void inOrderTraversal(PrintStream ps) {
+		this.ps = ps;
+		printTitle("In-order traversal");
 		inOrderTraversalHelper(root);
+		this.ps = null;
 	}
 
 	private void inOrderTraversalHelper(BSTNode node) {
 		if (node != null) {
 			inOrderTraversalHelper(node.getLeft());
-			//ps.print(node.getDollar() + " ");
-			System.out.println(node.getDollar() + " ");
+			printNode(node);
 			inOrderTraversalHelper(node.getRight());
 		}
 	}
 
-	public void preOrderTraversal() {
-		System.out.println("\nPre-order traversal: ");
+	public void preOrderTraversal(PrintStream ps) {
+		this.ps = ps;
+		printTitle("Pre-order traversal");
 		preOrderTraversalHelper(root);
+		this.ps = null;
 	}
 
 	private void preOrderTraversalHelper(BSTNode node) {
 		if (node != null) {
-			System.out.println(node.getDollar() + " ");
+			printNode(node);
 			preOrderTraversalHelper(node.getLeft());
 			preOrderTraversalHelper(node.getRight());
 		}
 	}
 
-	public void postOrderTraversal() {
-		System.out.println("\nPost-order traversal: ");
+	public void postOrderTraversal(PrintStream ps) {
+		this.ps = ps;
+		printTitle("Post-order traversal");
 		postOrderTraversalHelper(root);
+		this.ps = null;
 	}
 
 	private void postOrderTraversalHelper(BSTNode node) {
 		if (node != null) {
 			postOrderTraversalHelper(node.getLeft());
 			postOrderTraversalHelper(node.getRight());
-			System.out.println(node.getDollar() + " ");
+			printNode(node);
 		}
 	}
 
-	public void breadthFirstTraversal() {
-		System.out.println("\nBreadth-first traversal: ");
+	public void breadthFirstTraversal(PrintStream ps) {
+		this.ps = ps;
+		printTitle("Breadth-first traversal");
 		int height = getHeight(root);
 		
 		for (int i = 1; i <= height; i++)
 			breadthFirstTraversalHelper(root, i);
+		
+		this.ps = null;
 	}
 	
 	private int getHeight(BSTNode node) {
 		if (node == null)
-            return 0;
-        else {
-            int lheight = getHeight(node.getLeft());
-            int rheight = getHeight(node.getRight());
+			return 0;
+		else {
+			int lheight = getHeight(node.getLeft());
+			int rheight = getHeight(node.getRight());
 
-            if (lheight > rheight)
-                return (lheight + 1);
-            else
-                return (rheight + 1);
-        }
+			if (lheight > rheight)
+				return (lheight + 1);
+			else
+				return (rheight + 1);
+		}
 	}
 
 	private void breadthFirstTraversalHelper(BSTNode node, int level) {
 		if (node == null)
-            return;
-        if (level == 1)
-            System.out.println(node.getDollar());
-        else if (level > 1) {
-        	breadthFirstTraversalHelper(node.getLeft(), level - 1);
-        	breadthFirstTraversalHelper(node.getRight(), level - 1);
-        }
+			return;
+		if (level == 1)
+			printNode(node);
+		else if (level > 1) {
+			breadthFirstTraversalHelper(node.getLeft(), level - 1);
+			breadthFirstTraversalHelper(node.getRight(), level - 1);
+		}
 	}
 
 	public int count() {

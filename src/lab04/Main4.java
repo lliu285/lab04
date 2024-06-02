@@ -46,33 +46,6 @@ public class Main4 {
         	bst.insert(dollars[i]);
         }
         
-        System.out.println(bst.search(new Dollar(3, 00)));
-        
-        
-        String data = "This is a text inside the file.";
-
-        try {
-            PrintStream output = new PrintStream("output.txt");
-
-            output.print(data);
-            output.close();
-        }
-        catch(Exception e) {
-            e.getStackTrace();
-        }       
-        
-        try {
-            File myObj = new File("filename.txt");
-            if (myObj.createNewFile()) {
-              System.out.println("File created: " + myObj.getName());
-            } else {
-              System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    	
         printOutput(bst);
         
         Scanner sc = new Scanner(System.in);
@@ -94,18 +67,15 @@ public class Main4 {
 	        
 	        if (s.equals("a")) {
 	        	addNodes(bst, sc);
-	        	System.out.println("\nBreadth-first: ");
-	            bst.breadthFirstTraversal(); 
 	        } else if (s.equals("s")) {
 	        	searchNodes(bst, sc);
 	        } else if (s.equals("d")) {
 	        	deleteNodes(bst, sc);
-	        	System.out.println("\nBreadth-first: ");
-	            bst.breadthFirstTraversal(); 
 	        } else if (s.equals("p")) {
 	        	printOutput(bst);
 	        } else if (s.equals("e")) {
-	        	System.out.println("exit");
+	        	printOutput(bst);
+	        	break;
 	        } else {
 	        	System.out.println("Please choose a valid operation.");
 	        }
@@ -160,10 +130,18 @@ public class Main4 {
     }
     
     public static void printOutput(BST bst) {
-    	bst.breadthFirstTraversal(); 
-        bst.inOrderTraversal(); 
-        bst.preOrderTraversal();
-        bst.postOrderTraversal();
+		try {
+			File file = new File("output.txt");
+			PrintStream ps = new PrintStream(file);
+			bst.breadthFirstTraversal(ps); 
+	        bst.inOrderTraversal(ps); 
+	        bst.preOrderTraversal(ps);
+	        bst.postOrderTraversal(ps);
+	        System.out.println(file.getAbsolutePath());
+	        ps.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} 
     }
     
     
